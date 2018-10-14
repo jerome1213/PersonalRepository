@@ -23,23 +23,20 @@ from __future__ import division
 from __future__ import print_function
 
 import sys
-
-import tensorflow as tf
 from os.path import join
 
-from path_manager import DATASET_DIR
+import tensorflow as tf
 from pycocotools.coco import COCO
 
 
-from train_config  import PreprocessingConfig
-from train_config  import TrainConfig
-from model_config  import ModelConfig
-
-
 # for coco dataset
-import dataset_augment
-from dataset_prepare import CocoMetadata
+from PoseEstimation.tfmodules.coco_dataload_modules.dataset_prepare import CocoMetadata
+from PoseEstimation.tfmodules.model_config import ModelConfig
+from PoseEstimation.tfmodules.path_manager import DATASET_DIR
+from PoseEstimation.tfmodules.train_config import PreprocessingConfig
+from PoseEstimation.tfmodules.train_config import TrainConfig
 
+from PoseEstimation.tfmodules.coco_dataload_modules.dataset_augment import preprocess_image
 
 sys.path.insert(0,DATASET_DIR)
 
@@ -63,7 +60,7 @@ class DataLoader(object):
                  use_bfloat16,
                  transpose_input=True):
 
-        self.image_preprocessing_fn = dataset_augment.preprocess_image
+        self.image_preprocessing_fn = preprocess_image
         self.is_training            = is_training
         self.use_bfloat16           = use_bfloat16
         self.data_dir               = data_dir

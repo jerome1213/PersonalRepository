@@ -23,8 +23,8 @@ import numpy as np
 import tfplot
 import tfplot.summary
 
-from train_config import TrainConfig
-from model_config import ModelConfig
+from PoseEstimation.tfmodules.train_config import TrainConfig
+from PoseEstimation.tfmodules.model_config import ModelConfig
 
 # config instance generation
 train_config = TrainConfig()

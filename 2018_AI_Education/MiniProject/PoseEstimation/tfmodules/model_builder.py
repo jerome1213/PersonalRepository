@@ -56,6 +56,7 @@ class ModelBuilder(object):
                              scope='recept'):
         
         with tf.variable_scope(name_or_scope=scope, values=[ch_in]):
+            
             net = slim.conv2d(inputs=ch_in,
                               num_outputs=num_outputs,
                               kernel_size=model_config.kernel_shape['r1'],
@@ -67,6 +68,7 @@ class ModelBuilder(object):
                               padding='SAME',
                               trainable=model_config.is_trainable,
                               scope='7x7conv')
+            
             net = slim.batch_norm(inputs=net,
                                   decay=model_config.batch_norm_decay,
                                   fused=model_config.batch_norm_fused,
@@ -122,7 +124,7 @@ class ModelBuilder(object):
             downsample_out_stack = []
             net = ch_in
             for down_index in range(0, model_config.num_stage):
-                new = self.downsample_hourglass(ch_in=net,
+                net = self.downsample_hourglass(ch_in=net,
                                                 model_config=model_config,
                                                 model_config_separable_conv=model_config_separable_conv,
                                                 scope='downsample_' + str(down_index))

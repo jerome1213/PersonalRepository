@@ -22,21 +22,21 @@ import time
 import numpy as np
 import tensorflow as tf
 
-from path_manager import COCO_DATALOAD_DIR
-from path_manager import DATASET_DIR
-from path_manager import EXPORT_DIR
-from path_manager import TF_MODULE_DIR
+from PoseEstimation.tfmodules.path_manager import COCO_DATALOAD_DIR
+from PoseEstimation.tfmodules.path_manager import DATASET_DIR
+from PoseEstimation.tfmodules.path_manager import EXPORT_DIR
+from PoseEstimation.tfmodules.path_manager import TF_MODULE_DIR
 
 sys.path.insert(0, TF_MODULE_DIR)
 sys.path.insert(0, EXPORT_DIR)
 sys.path.insert(0, COCO_DATALOAD_DIR)
 
 # < here you need import your module >
-from model_config import ModelConfig
-from train_config import TrainConfig
+from PoseEstimation.tfmodules.model_config import ModelConfig
+from PoseEstimation.tfmodules.train_config import TrainConfig
 
-from model_builder import ModelBuilder
-from data_loader import DataLoader
+from PoseEstimation.tfmodules.model_builder import ModelBuilder
+from PoseEstimation.tfmodules.data_loader import DataLoader
 
 
 def train(dataset_train, dataset_test):

@@ -7,15 +7,15 @@
 
 import math
 import random
+from enum import Enum
 
 import cv2
 import numpy as np
 from tensorpack.dataflow.imgaug.geometry import RotationAndCropValid
-from enum import Enum
-
 
 # custom addition for tf-tiny-pose-estimation
-from model_config  import ModelConfig
+from PoseEstimation.tfmodules.model_config import ModelConfig
+
 model_config = ModelConfig()
 
 _network_w = int(model_config._input_size)
