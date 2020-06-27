@@ -1,9 +1,6 @@
 package sort.main;
 
-import sort.sort.BubbleSort;
-import sort.sort.InsertionSort;
-import sort.sort.MergeSort;
-import sort.sort.SelectionSort;
+import sort.sort.*;
 
 public class TestMain {
     public static void main(String[] args) {

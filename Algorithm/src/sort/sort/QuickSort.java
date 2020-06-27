@@ -1,7 +1,4 @@
-package sort.main;
-
-import sort.sort.IFunctions;
-import sort.sort.SortMain;
+package sort.sort;
 
 import java.util.ArrayList;
 
