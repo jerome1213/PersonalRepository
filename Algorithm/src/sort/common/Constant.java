@@ -1,7 +1,7 @@
 package sort.common;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Constant {
-    public static ArrayList<Integer> testRandomList = null;
+    public static List<Integer> testRandomList = null;
 }

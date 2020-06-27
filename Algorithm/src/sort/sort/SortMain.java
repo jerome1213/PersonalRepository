@@ -3,16 +3,17 @@ package sort.sort;
 import sort.common.Constant;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class SortMain {
-    protected int numRandomInteger = 10000;
+    protected int numRandomInteger = 30000;
 
     protected long beforeTime = 0;
     protected long afterTime = 0;
     protected long secDiffTime = 0;
 
-    protected ArrayList<Integer> testRandomList = Constant.testRandomList;
+    protected List<Integer> testRandomList = Constant.testRandomList;
 
     public SortMain() {
         Random random = new Random();

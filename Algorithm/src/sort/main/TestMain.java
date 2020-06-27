@@ -1,6 +1,8 @@
 package sort.main;
 
 import sort.sort.BubbleSort;
+import sort.sort.InsertionSort;
+import sort.sort.MergeSort;
 import sort.sort.SelectionSort;
 
 public class TestMain {
@@ -10,6 +12,12 @@ public class TestMain {
 
         SelectionSort selectionSort = new SelectionSort();
         selectionSort.runSort();
+
+        InsertionSort insertionSort = new InsertionSort();
+        insertionSort.runSort();
+
+        MergeSort mergeSort = new MergeSort();
+        mergeSort.runSort();
 
     }
 }
