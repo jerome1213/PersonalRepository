@@ -1,10 +1,14 @@
 package sort.sort;
 
+import java.util.ArrayList;
+
 public class InsertionSort extends SortMain implements IFunctions {
     // https://www.youtube.com/watch?v=iqf96rVQ8fY
 
+    protected ArrayList<Integer> testRandomList;
     public InsertionSort() {
-        System.out.println("InsertionSort");
+        testRandomList = (ArrayList<Integer>) mainTestRandomList.clone();
+        System.out.println(this.getClass().getName());
     }
 
     @Override
@@ -29,11 +33,16 @@ public class InsertionSort extends SortMain implements IFunctions {
             int key = testRandomList.get(i);
             int j = i - 1;
             while (j >= 0 && testRandomList.get(j) > key) {
-                swap(j + 1, j);
+                swap(testRandomList, j + 1, j);
                 j--;
             }
         }
 
         printDiffTime();
+    }
+
+    public void printDiffTime() {
+        System.out.println(testRandomList);
+        super.printDiffTime();
     }
 }

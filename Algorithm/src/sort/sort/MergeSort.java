@@ -1,11 +1,7 @@
 package sort.sort;
 
-import sun.security.util.ArrayUtil;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class MergeSort extends SortMain implements IFunctions {
     // https://www.youtube.com/watch?v=FCAtxryNgq4&list=PLLcbGhhl4sQDIp8j8L-OuI9n7oOuEGrnJ&index=11
@@ -21,12 +17,12 @@ public class MergeSort extends SortMain implements IFunctions {
         - Best      : O (n log n)
     */
 
-    int MAX_SIZE = 8;
-    int[] testList = {21, 10, 12, 20, 25, 13, 15, 22};
-    int[] sorted = new int[MAX_SIZE];
+    protected ArrayList<Integer> testRandomList;
+    int[] sorted = null;
 
     public MergeSort() {
-        System.out.println("MergeSort");
+        testRandomList = (ArrayList<Integer>) mainTestRandomList.clone();
+        System.out.println(this.getClass().getName());
     }
 
     @Override
@@ -34,54 +30,14 @@ public class MergeSort extends SortMain implements IFunctions {
         beforeTime = System.currentTimeMillis();
 
         sorted = new int[testRandomList.size()];
-        mergeSort(testRandomList, 0, testList.length - 1);
-//        mergeSort(testList, 0, testList.length - 1);
+        mergeSort(testRandomList, 0, testRandomList.size() - 1);
 
         printDiffTime();
     }
 
-
-    private void mergeSort(int[] arr, int start, int end) {
-        if (start < end) {
-            int center = (start + (end - 1)) / 2;
-            mergeSort(arr, start, center);
-            mergeSort(arr, center + 1, end);
-
-            merge(arr, start, end);
-        }
-    }
-
-    private void merge(int[] arr, int start, int end) {
-        int center = (start + end) / 2;
-        int leftArrPosition = start;
-        int rightArrPosition = center + 1;
-        int sortedArrPosition = start;
-
-
-        while (leftArrPosition <= center && rightArrPosition <= end) {
-            if (arr[leftArrPosition] < arr[rightArrPosition]) {
-                sorted[sortedArrPosition++] = arr[leftArrPosition++];
-            } else {
-                sorted[sortedArrPosition++] = arr[rightArrPosition++];
-            }
-        }
-
-        while (leftArrPosition <= center) {
-            sorted[sortedArrPosition++] = arr[leftArrPosition++];
-        }
-
-        while (rightArrPosition <= end) {
-            sorted[sortedArrPosition++] = arr[rightArrPosition++];
-        }
-
-        for (int i = start; i <= end; i++) {
-            arr[i] = sorted[i];
-        }
-    }
-
     private void mergeSort(List<Integer> arr, int start, int end) {
         if (start < end) {
-            int center = (start + (end - 1)) / 2;
+            int center = getCenterPosition(start, end);
             mergeSort(arr, start, center);
             mergeSort(arr, center + 1, end);
 
@@ -90,7 +46,7 @@ public class MergeSort extends SortMain implements IFunctions {
     }
 
     private void merge(List<Integer> arr, int start, int end) {
-        int center = (start + end) / 2;
+        int center = getCenterPosition(start, end);
         int leftArrPosition = start;
         int rightArrPosition = center + 1;
         int sortedArrPosition = start;
@@ -114,5 +70,10 @@ public class MergeSort extends SortMain implements IFunctions {
         for (int i = start; i <= end; i++) {
             arr.set(i, sorted[i]);
         }
+    }
+
+    public void printDiffTime() {
+        System.out.println(testRandomList);
+        super.printDiffTime();
     }
 }

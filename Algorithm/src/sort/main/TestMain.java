@@ -19,5 +19,7 @@ public class TestMain {
         MergeSort mergeSort = new MergeSort();
         mergeSort.runSort();
 
+        QuickSort quickSort = new QuickSort();
+        quickSort.runSort();
     }
 }

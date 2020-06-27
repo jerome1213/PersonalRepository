@@ -1,9 +1,13 @@
 package sort.sort;
 
+import java.util.ArrayList;
+
 public class SelectionSort extends SortMain implements IFunctions {
+    protected ArrayList<Integer> testRandomList;
 
     public SelectionSort() {
-        System.out.println("SelectionSort");
+        testRandomList = (ArrayList<Integer>) mainTestRandomList.clone();
+        System.out.println(this.getClass().getName());
     }
 
     @Override
@@ -17,7 +21,7 @@ public class SelectionSort extends SortMain implements IFunctions {
                     min = j;
                 }
             }
-            swap(min, i);
+            swap(testRandomList, min, i);
         }
 
         printDiffTime();
