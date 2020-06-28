@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Random;
 
 public class SortMain {
-    protected int numRandomInteger = 50000;
+    protected int numRandomInteger = 10000;
 
     protected long beforeTime = 0;
     protected long afterTime = 0;

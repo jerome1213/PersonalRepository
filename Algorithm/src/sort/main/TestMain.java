@@ -18,5 +18,8 @@ public class TestMain {
 
         QuickSort quickSort = new QuickSort();
         quickSort.runSort();
+
+        ShellSort shellSort = new ShellSort();
+        shellSort.runSort();
     }
 }

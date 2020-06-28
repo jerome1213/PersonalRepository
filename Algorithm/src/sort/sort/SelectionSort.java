@@ -26,4 +26,9 @@ public class SelectionSort extends SortMain implements IFunctions {
 
         printDiffTime();
     }
+
+    public void printDiffTime() {
+        System.out.println(testRandomList);
+        super.printDiffTime();
+    }
 }
