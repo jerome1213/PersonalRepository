@@ -8,9 +8,9 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        String beginWord = "hot";
-        String endWord = "dog";
-        List<String> wordList = Arrays.asList(new String[]{"hot", "dog", "dot"});
+        String beginWord = "a";
+        String endWord = "c";
+        List<String> wordList = Arrays.asList(new String[]{"a", "b", "c"});
 
         Solution solution = new Solution();
         solution.ladderLength(beginWord, endWord, wordList);

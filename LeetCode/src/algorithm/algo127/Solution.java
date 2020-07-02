@@ -5,59 +5,83 @@ import java.util.*;
 
 public class Solution {
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+        boolean noEndWord = true;
+        for (String word : wordList) {
+            if (word.equals(endWord)) {
+                noEndWord = false;
+                break;
+            }
+        }
+        if (noEndWord) return 0;
+        return dfs(beginWord, endWord, wordList);
+    }
 
-        // Since all words are of same length.
-        int L = beginWord.length();
+    public int bfs(String beginWord, String endWord, List<String> wordList) {
+        boolean noEndWord = true;
+        for (String word : wordList) {
+            if (word.equals(endWord)) {
+                noEndWord = false;
+                break;
+            }
+        }
+        if (noEndWord) return 0;
 
-        // Dictionary to hold combination of words that can be formed,
-        // from any given word. By changing one letter at a time.
-        Map<String, List<String>> allComboDict = new HashMap<>();
+        Set<String> visited = new HashSet<>();
+        int wordLen = beginWord.length();
+        Queue<String> q = new LinkedList<>();
+        q.offer(beginWord);
 
-        wordList.forEach(
-                word -> {
-                    for (int i = 0; i < L; i++) {
-                        // Key is the generic word
-                        // Value is a list of words which have the same intermediate generic word.
-                        String newWord = word.substring(0, i) + '*' + word.substring(i + 1, L);
-                        List<String> transformations = allComboDict.getOrDefault(newWord, new ArrayList<>());
-                        transformations.add(word);
-                        allComboDict.put(newWord, transformations);
+        int ladderLength = 0;
+        while (!q.isEmpty()) {
+            int qSize = q.size();
+            boolean hasNext = false;
+            for (int i = 0; i < qSize; i++) {
+                String compare = q.poll();
+                if (compare == null) continue;
+
+                if (endWord.equals(compare)) return ladderLength + 1;
+
+                for (String word : wordList) {
+                    int score = 0;
+                    for (int j = 0; j < wordLen; j++) {
+                        if (compare.charAt(j) == word.charAt(j)) score++;
                     }
-                });
-
-        // Queue for BFS
-        Queue<Pair<String, Integer>> Q = new LinkedList<>();
-        Q.add(new Pair(beginWord, 1));
-
-        // Visited to make sure we don't repeat processing same word.
-        Map<String, Boolean> visited = new HashMap<>();
-        visited.put(beginWord, true);
-
-        while (!Q.isEmpty()) {
-            Pair<String, Integer> node = Q.remove();
-            String word = node.getKey();
-            int level = node.getValue();
-            for (int i = 0; i < L; i++) {
-
-                // Intermediate words for current word
-                String newWord = word.substring(0, i) + '*' + word.substring(i + 1, L);
-
-                // Next states are all the words which share the same intermediate state.
-                for (String adjacentWord : allComboDict.getOrDefault(newWord, new ArrayList<>())) {
-                    // If at any point if we find what we are looking for
-                    // i.e. the end word - we can return with the answer.
-                    if (adjacentWord.equals(endWord)) {
-                        return level + 1;
-                    }
-                    // Otherwise, add it to the BFS Queue. Also mark it visited
-                    if (!visited.containsKey(adjacentWord)) {
-                        visited.put(adjacentWord, true);
-                        Q.add(new Pair(adjacentWord, level + 1));
+                    if (score == wordLen - 1 && !visited.contains(word)) {
+                        hasNext = true;
+                        q.offer(word);
+                        visited.add(word);
                     }
                 }
             }
+            if (hasNext) ladderLength++;
         }
+        return 0;
+    }
 
+    private int dfs(String compare, String endWord, List<String> wordList) {
+        ArrayList<String> list = new ArrayList<>(wordList);
+        int wordLen = compare.length();
+        for (int i = 0; i < list.size(); i++) {
+            String word = wordList.get(i);
+            int depth = 0;
+            int score = 0;
+            if (word.equals(compare)) {
+                list.remove(i);
+                continue;
+            }
+            for (int j = 0; j < wordLen; j++) {
+                if (compare.charAt(j) == word.charAt(j)) score++;
+            }
+            if (score == wordLen - 1) {
+                list.remove(i);
+                if (word.equals(endWord)) {
+                    return depth + 1;
+                } else {
+                    depth = dfs(word, endWord, list) + 1;
+                    return depth;
+                }
+            }
+        }
         return 0;
     }
 }
